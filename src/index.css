@@ -1,0 +1,162 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hacker Theme Dark Mode Variables */
+
+@layer base {
+  :root {
+    --background: 10 10% 4%;
+    --foreground: 120 100% 70%;
+
+    --card: 10 10% 6%;
+    --card-foreground: 120 100% 70%;
+
+    --popover: 10 10% 4%;
+    --popover-foreground: 120 100% 70%;
+
+    --primary: 120 100% 25%;
+    --primary-foreground: 10 10% 4%;
+
+    --secondary: 10 10% 15%;
+    --secondary-foreground: 120 100% 70%;
+
+    --muted: 10 10% 15%;
+    --muted-foreground: 120 50% 50%;
+
+    --accent: 120 100% 25%;
+    --accent-foreground: 10 10% 4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 120 20% 20%;
+    --input: 120 20% 20%;
+    --ring: 120 100% 25%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 10 10% 4%;
+    --sidebar-foreground: 120 100% 70%;
+    --sidebar-primary: 120 100% 25%;
+    --sidebar-primary-foreground: 10 10% 4%;
+    --sidebar-accent: 10 10% 15%;
+    --sidebar-accent-foreground: 120 100% 70%;
+    --sidebar-border: 120 20% 20%;
+    --sidebar-ring: 120 100% 25%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-cyber-black text-terminal-green font-terminal;
+    background: radial-gradient(ellipse at center, #111111 0%, #0a0a0a 100%);
+    min-height: 100vh;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-cyber-dark;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-terminal-green rounded;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-terminal-bright-green;
+  }
+}
+
+@layer components {
+  /* Terminal cursor */
+  .cursor::after {
+    content: '█';
+    @apply animate-blink text-terminal-bright-green;
+  }
+
+  /* Glitch effect */
+  .glitch {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .glitch::before {
+    animation: glitch-1 2s infinite;
+    color: #ff0040;
+    z-index: -1;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  }
+
+  .glitch::after {
+    animation: glitch-2 2s infinite;
+    color: #00ffff;
+    z-index: -2;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  }
+
+  @keyframes glitch-1 {
+    0%, 14%, 15%, 49%, 50%, 99%, 100% {
+      transform: translate(0, 0);
+    }
+    1%, 13% {
+      transform: translate(-1px, 0);
+    }
+    16%, 48% {
+      transform: translate(1px, 0);
+    }
+  }
+
+  @keyframes glitch-2 {
+    0%, 20%, 21%, 62%, 63%, 99%, 100% {
+      transform: translate(0, 0);
+    }
+    21%, 61% {
+      transform: translate(1px, 0);
+    }
+    62%, 98% {
+      transform: translate(-1px, 0);
+    }
+  }
+
+  /* Terminal text effects */
+  .terminal-text {
+    @apply text-terminal-green drop-shadow-[0_0_5px_rgba(0,255,65,0.5)];
+  }
+
+  .terminal-glow {
+    @apply text-terminal-bright-green;
+    text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 15px #00ff41;
+  }
+
+  .matrix-text {
+    @apply text-terminal-matrix-green font-mono;
+    text-shadow: 0 0 10px #00ff00;
+  }
+}
+
+@layer utilities {
+  .text-shadow-glow {
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+  }
+}
